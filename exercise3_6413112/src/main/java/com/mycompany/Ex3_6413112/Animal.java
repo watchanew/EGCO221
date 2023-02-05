@@ -1,21 +1,12 @@
 //MR.SASIT SRIRAT 6413112
-//เหลือฟังก์ชัน sort สุดท้ายกับกดปุ่มอื่นเพื่อออกจากโปรแกรม 
-// อัพเดต 5/02/2023 18.12 
-
-
-
-
-
-
-
+//MR.WATCHARASAK PROMMANEE 6413110
+//remain: organize output
+//update 5/02/2023 19.37
 
 package com.mycompany.Ex3_6413112;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 class Animal {
     private String name; // fix
@@ -45,13 +36,12 @@ class Animal {
         return lifespan;
     };
 
-    public int getStation() {
-        return gestation;
+    public int getGestation() {
+        return gestation; 
     };
 }
 
 class SortAnimalByName implements Comparator<Animal> {
-
     @Override
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
@@ -61,7 +51,6 @@ class SortAnimalByName implements Comparator<Animal> {
 }
 
 class SortAnimalByWeight implements Comparator<Animal> {
-
     @Override
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
@@ -77,11 +66,9 @@ class SortAnimalByWeight implements Comparator<Animal> {
             return 0;
         return 0;
     }
-
 }
 
 class SortAnimalBySleep implements Comparator<Animal> {
-
     @Override
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
@@ -110,7 +97,7 @@ class SortAnimalByLifespan implements Comparator<Animal> {
         } else if (o1.getLifespan() < o2.getLifespan()) {
             return -1;
         } else if (o1.getLifespan() == o2.getLifespan()) {
-            if (o1.getStation() > o2.getStation()) {
+            if (o1.getGestation() > o2.getGestation()) {
                 return -1;
             }
         } else
@@ -123,22 +110,33 @@ class SortAnimalByGestation implements Comparator<Animal> {
 
     @Override
     public int compare(Animal o1, Animal o2) {
-        // TODO Auto-generated method stub
+        if (o1.getGestation() > o2.getGestation()) {
+            return 1;
+        } else if (o1.getGestation() < o2.getGestation()) {
+            return -1;
+        } else if (o1.getGestation() == o2.getGestation()) {
+            if (o1.getLifespan() > o2.getLifespan()) {
+                return -1;
+            }
+        } else
+            return 0;
         return 0;
     }
 }
 
 public class process {
     public static void main(String[] args) throws Exception {
+
         ArrayList<Animal> AnimalRecords = new ArrayList<Animal>();
-        // Scanner g = new Scanner(System.in);
         File file = new File("src/main/java/animals.txt");
         Scanner scanfile = new Scanner(file);
 
         while (scanfile.hasNext()) {
+            
             String line = scanfile.nextLine();
             String[] buf = line.split(",");
             String name = buf[0].trim();
+
             int weight = Integer.parseInt(buf[1].trim());
             int sleep = Integer.parseInt(buf[2].trim());
             int lifespan = Integer.parseInt(buf[3].trim());
@@ -152,6 +150,10 @@ public class process {
             System.out.println("Sort by >> n = name, w= weight, s = sleep, l = lifespan, g = gestation, other = quit");
             System.out.print("Select sort : ");
             String menu = input.next();
+            if (!menu.equalsIgnoreCase("G") && !menu.equalsIgnoreCase("L")
+            && !menu.equalsIgnoreCase("S") && !menu.equalsIgnoreCase("W") && !menu.equalsIgnoreCase("N")) {
+        break;
+    }
             System.out
                     .println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
             System.out.println(
@@ -161,28 +163,34 @@ public class process {
                 Collections.sort(AnimalRecords, new SortAnimalByName());
                 for (Animal m : AnimalRecords) {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
-                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getGestation());
                 }
             } else if (menu.equalsIgnoreCase("W")) {
                 Collections.sort(AnimalRecords, new SortAnimalByWeight());
                 for (Animal m : AnimalRecords) {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
-                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getGestation());
                 }
             } else if (menu.equalsIgnoreCase("S")) {
                 Collections.sort(AnimalRecords, new SortAnimalBySleep());
                 for (Animal m : AnimalRecords) {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
-                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getGestation());
                 }
             } else if (menu.equalsIgnoreCase("L")) {
                 Collections.sort(AnimalRecords, new SortAnimalByLifespan());
                 for (Animal m : AnimalRecords) {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
-                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getGestation());
                 }
             }
-            
+            else if (menu.equalsIgnoreCase("G")) {
+                Collections.sort(AnimalRecords, new SortAnimalByGestation());
+                for (Animal m : AnimalRecords) {
+                    System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getGestation());
+                }
+            }
         }
     }
 }
