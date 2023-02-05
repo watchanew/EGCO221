@@ -1,4 +1,14 @@
 //MR.SASIT SRIRAT 6413112
+//เหลือฟังก์ชัน sort สุดท้ายกับกดปุ่มอื่นเพื่อออกจากโปรแกรม 
+
+
+
+
+
+
+
+
+
 package com.mycompany.Ex3_6413112;
 
 import java.io.File;
