@@ -15,8 +15,7 @@ class Animal {
     private String name; // fix
     private int weight, sleep, lifespan, gestation; // fix
 
-    public Animal(String name,int weight,int sleep, int lifespan,int gestation)
-    {
+    public Animal(String name, int weight, int sleep, int lifespan, int gestation) {
         this.name = name;
         this.weight = weight;
         this.sleep = sleep;
@@ -67,11 +66,16 @@ class SortAnimalByWeight implements Comparator<Animal> {
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
         if (o1.getWeight() > o2.getWeight()) {
-            return -1;
-        } else if (o1.getWeight() < o2.getWeight()) {
             return 1;
+        } else if (o1.getWeight() < o2.getWeight()) {
+            return -1;
+        } else if (o1.getWeight() == o2.getWeight()) {
+            if (o1.getSleep() > o2.getSleep()) {
+                return -1;
+            }
         } else
             return 0;
+        return 0;
     }
 
 }
@@ -81,6 +85,16 @@ class SortAnimalBySleep implements Comparator<Animal> {
     @Override
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
+        if (o1.getSleep() > o2.getSleep()) {
+            return 1;
+        } else if (o1.getSleep() < o2.getSleep()) {
+            return -1;
+        } else if (o1.getSleep() == o2.getSleep()) {
+            if (o1.getLifespan() > o2.getLifespan()) {
+                return -1;
+            }
+        } else
+            return 0;
         return 0;
     }
 
@@ -106,17 +120,15 @@ class SortAnimalByGestation implements Comparator<Animal> {
 }
 
 public class process {
-    public static void main(String[] args) throws Exception 
-    {
-        ArrayList<Animal> AnimalRecords  = new ArrayList<Animal>();
-        //Scanner g = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+        ArrayList<Animal> AnimalRecords = new ArrayList<Animal>();
+        // Scanner g = new Scanner(System.in);
         File file = new File("src/main/java/animals.txt");
         Scanner scanfile = new Scanner(file);
         System.out.println("Sort by >> ");
         System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
         System.out.println("=======================================================================================");
-        while (scanfile.hasNext()) 
-        {
+        while (scanfile.hasNext()) {
             String line = scanfile.nextLine();
             String[] buf = line.split(",");
             String name = buf[0].trim();
@@ -124,19 +136,29 @@ public class process {
             int sleep = Integer.parseInt(buf[2].trim());
             int lifespan = Integer.parseInt(buf[3].trim());
             int gestation = Integer.parseInt(buf[4].trim());
-            //System.out.println(scanfile.nextLine());
+            // System.out.println(scanfile.nextLine());
             AnimalRecords.add(new Animal(name, weight, sleep, lifespan, gestation));
         }
-        Collections.sort(AnimalRecords,new SortAnimalByName());
-        for (Animal m : AnimalRecords)
-        {
-            System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" + 
-             m.getSleep() + "\t" +  m.getLifespan() + "\t" + m.getStation());
-             
-        }
-
-        //
         scanfile.close();
+
+        while (true) {
+            Scanner input = new Scanner(System.in);
+            System.out.println("Select sort : ");
+            String menu = input.next();
+
+            if (menu.equalsIgnoreCase("N")) {
+                Collections.sort(AnimalRecords, new SortAnimalByName());
+                for (Animal m : AnimalRecords) {
+                    System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" +
+                            m.getSleep() + "\t" + m.getLifespan() + "\t" + m.getStation());
+                }
+            } else if (menu.equalsIgnoreCase("W")) {
+                Collections.sort(AnimalRecords, new SortAnimalByWeight());
+                for (Animal m : AnimalRecords) {
+                    System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" +
+                            m.getSleep() + "\t" + m.getLifespan() + "\t" + m.getStation());
+                }
+            }
+        }
     }
-    
 }
