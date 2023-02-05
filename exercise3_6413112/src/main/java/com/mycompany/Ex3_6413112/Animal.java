@@ -125,9 +125,7 @@ public class process {
         // Scanner g = new Scanner(System.in);
         File file = new File("src/main/java/animals.txt");
         Scanner scanfile = new Scanner(file);
-        System.out.println("Sort by >> ");
-        System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
-        System.out.println("=======================================================================================");
+
         while (scanfile.hasNext()) {
             String line = scanfile.nextLine();
             String[] buf = line.split(",");
@@ -143,20 +141,30 @@ public class process {
 
         while (true) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Select sort : ");
+            System.out.println("Sort by >> n = name, w= weight, s = sleep, l = lifespan, g = gestation, other = quit");
+            System.out.print("Select sort : ");
             String menu = input.next();
+            System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
+            System.out.println("===============================================================================================");
 
             if (menu.equalsIgnoreCase("N")) {
                 Collections.sort(AnimalRecords, new SortAnimalByName());
                 for (Animal m : AnimalRecords) {
-                    System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" +
-                            m.getSleep() + "\t" + m.getLifespan() + "\t" + m.getStation());
+                    System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
                 }
             } else if (menu.equalsIgnoreCase("W")) {
                 Collections.sort(AnimalRecords, new SortAnimalByWeight());
                 for (Animal m : AnimalRecords) {
-                    System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" +
-                            m.getSleep() + "\t" + m.getLifespan() + "\t" + m.getStation());
+                    System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                }
+            }
+            else if (menu.equalsIgnoreCase("S")) {
+                Collections.sort(AnimalRecords, new SortAnimalBySleep());
+                for (Animal m : AnimalRecords) {
+                    System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
                 }
             }
         }
