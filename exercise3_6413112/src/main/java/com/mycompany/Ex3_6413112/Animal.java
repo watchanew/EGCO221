@@ -1,3 +1,4 @@
+//MR.SASIT SRIRAT 6413112
 package com.mycompany.Ex3_6413112;
 
 import java.io.File;
@@ -129,7 +130,9 @@ public class process {
         Collections.sort(AnimalRecords,new SortAnimalByName());
         for (Animal m : AnimalRecords)
         {
-            System.out.println(m.getName());
+            System.out.println(m.getName() + "\t\t" + m.getWeight() + "\t" + 
+             m.getSleep() + "\t" +  m.getLifespan() + "\t" + m.getStation());
+             
         }
 
         //
