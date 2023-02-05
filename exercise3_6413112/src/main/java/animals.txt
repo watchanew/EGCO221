@@ -1,0 +1,28 @@
+name, weight, sleep, lifespan, gestation
+Arctic fox,          3, 11,  14,  60
+Patas monkey,       11, 10,  20, 170
+Baboon,             11, 10,  27, 180
+Gorilla,           207, 12,  39, 252
+Cat,                 3, 15,  28,  63
+Tree hyrax,          2,  5,   8, 200
+Red fox,             4, 10,  10,  52
+African elephant, 6654,  3,  39, 645
+Donkey,            187,  3,  40, 365
+Goat,               28,  4,  20, 148
+Brazilian tapir,   160,  6,  30, 392
+Rabbit,              3,  8,  18,  31
+Sheep,              56,  4,  20, 148
+Gray wolf,          36, 13,  15,  63
+Horse,             521,  3,  46, 336
+Jaguar,            100, 11,  22, 100
+Man,                62,  8, 100, 267
+Opossum,             2, 19,   5,  12
+Cow,               465,  4,  30, 281
+Pig,               192,  8,  27, 115
+Water opossum,       4, 19,   3,  14
+Raccoon,             4, 13,  15,  63
+Gray seal,          85,  6,  41, 310
+Asian elephant,   2547,  4,  69, 624
+Rhesus monkey,       7, 10,  29, 164
+Chimpanzee,         52, 10,  50, 230
+Roe deer,           15,  3,  17, 148
