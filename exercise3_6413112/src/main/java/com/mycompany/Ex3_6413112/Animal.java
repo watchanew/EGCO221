@@ -104,7 +104,7 @@ class SortAnimalByGestation implements Comparator<Animal> {
     }
 }
 
-class process {
+public class process {
     public static void main(String[] args) throws Exception 
     {
         ArrayList<Animal> AnimalRecords  = new ArrayList<Animal>();
@@ -112,6 +112,8 @@ class process {
         File file = new File("src/main/java/animals.txt");
         Scanner scanfile = new Scanner(file);
         System.out.println("Sort by >> ");
+        System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
+        System.out.println("=======================================================================================");
         while (scanfile.hasNext()) 
         {
             String line = scanfile.nextLine();
@@ -125,10 +127,13 @@ class process {
             AnimalRecords.add(new Animal(name, weight, sleep, lifespan, gestation));
         }
         Collections.sort(AnimalRecords,new SortAnimalByName());
-        
+        for (Animal m : AnimalRecords)
+        {
+            System.out.println(m.getName());
+        }
 
-        System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
-        System.out.println("=======================================================================================");
-
+        //
+        scanfile.close();
     }
+    
 }
