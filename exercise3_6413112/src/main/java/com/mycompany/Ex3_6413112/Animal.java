@@ -3,13 +3,9 @@ package com.mycompany.Ex3_6413112;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
-import java.lang.*;
 
 class Animal {
     private String name; // fix
@@ -42,12 +38,6 @@ class Animal {
     public int getStation() {
         return gestation;
     };
-
-    ArrayList<Animal> A = new ArrayList<Animal>();
-
-    public void NameSort() {
-        Collections.sort(A, new SortAnimalByName());
-    }
 }
 
 class SortAnimalByName implements Comparator<Animal> {
@@ -105,9 +95,18 @@ class SortAnimalByLifespan implements Comparator<Animal> {
     @Override
     public int compare(Animal o1, Animal o2) {
         // TODO Auto-generated method stub
+        if (o1.getLifespan() > o2.getLifespan()) {
+            return 1;
+        } else if (o1.getLifespan() < o2.getLifespan()) {
+            return -1;
+        } else if (o1.getLifespan() == o2.getLifespan()) {
+            if (o1.getStation() > o2.getStation()) {
+                return -1;
+            }
+        } else
+            return 0;
         return 0;
     }
-
 }
 
 class SortAnimalByGestation implements Comparator<Animal> {
@@ -134,7 +133,6 @@ public class process {
             int sleep = Integer.parseInt(buf[2].trim());
             int lifespan = Integer.parseInt(buf[3].trim());
             int gestation = Integer.parseInt(buf[4].trim());
-            // System.out.println(scanfile.nextLine());
             AnimalRecords.add(new Animal(name, weight, sleep, lifespan, gestation));
         }
         scanfile.close();
@@ -144,8 +142,10 @@ public class process {
             System.out.println("Sort by >> n = name, w= weight, s = sleep, l = lifespan, g = gestation, other = quit");
             System.out.print("Select sort : ");
             String menu = input.next();
-            System.out.println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
-            System.out.println("===============================================================================================");
+            System.out
+                    .println("Animal\t\t Weight (kg)\tSleep time (hrs/day)\tMaximum lifespan (yrs)\tGestation (days)");
+            System.out.println(
+                    "===============================================================================================");
 
             if (menu.equalsIgnoreCase("N")) {
                 Collections.sort(AnimalRecords, new SortAnimalByName());
@@ -159,14 +159,20 @@ public class process {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
                             m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
                 }
-            }
-            else if (menu.equalsIgnoreCase("S")) {
+            } else if (menu.equalsIgnoreCase("S")) {
                 Collections.sort(AnimalRecords, new SortAnimalBySleep());
                 for (Animal m : AnimalRecords) {
                     System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
                             m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
                 }
+            } else if (menu.equalsIgnoreCase("L")) {
+                Collections.sort(AnimalRecords, new SortAnimalByLifespan());
+                for (Animal m : AnimalRecords) {
+                    System.out.println(m.getName() + "\r\t\t\t" + m.getWeight() + "\t\t" +
+                            m.getSleep() + "\t\t\t" + m.getLifespan() + "\t\t\t" + m.getStation());
+                }
             }
+            
         }
     }
 }
