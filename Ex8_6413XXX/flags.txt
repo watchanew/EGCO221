@@ -1,0 +1,40 @@
+Thailand,        red, white, blue
+Armenia,         red, blue, orange
+Azerbaijan,      light_blue, red, green, white, stars, crescent
+Bhutan,          orange, red, white
+Malaysia,        red, white, blue, stars, crescent
+Japan,           white, red
+Laos,            red, blue, white
+Philippines,     blue, red, white, yellow, stars, sun
+Tuvalu,          red, white, blue, light_blue, yellow, stars
+Vietnam,         red, yellow, stars
+Argentina,       light_blue, white, yellow, sun
+Bahamas,         black, light_blue, yellow
+Colombia,        yellow, blue, red
+Costa Rica,      blue, white, red
+Cuba,            red, blue, white, stars
+Guyana,          red, black, yellow, white, green
+Jamaica,         green, black, yellow
+United States,   blue, red, white, stars
+Uruguay,         white, blue, yellow, sun
+Venezuela,       yellow, blue, red, white, stars
+Luxembourg,      red, white, light_blue
+Ireland,         green, white, orange
+Israel,          white, blue, stars
+Lithuania,       orange, green, red
+Ukraine,         blue, yellow
+United Kingdom,  red, white, blue
+Algeria,         green, white, red, stars, crescent
+Cameroon,        green, red, yellow, stars
+Ethiopia,        green, yellow, red, blue, stars
+Gabon,           green, yellow, light_blue
+Ghana,           red, yellow, green, black, stars
+Libya,           red, black, green, white, stars, crescent
+Mauritius,       red, blue, yellow, green
+Namibia,         blue, white, red, green, yellow, sun
+Niger,           orange, white, green
+South Africa,    black, yellow, green, white, red, blue
+Sudan,           red, white, black, green
+Tanzania,        green, yellow, black, light_blue
+Tunisia,         red, white, stars, crescent
+Zambia,          green, red, black, orange
