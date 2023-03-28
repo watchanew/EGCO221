@@ -70,29 +70,26 @@ class FlagFeatureMap {
     }
 
     public void printData() {
-        System.out.println("Total Countries = " + allCountries.size());
-        System.out.println("Total Features = " + workingMap.size());
-        Set<String> OutKey = workingMap.keySet();
-        for (String key : OutKey) {
-            LinkedHashSet<String> s = workingMap.get(key);
-            if (s != null) {
-                System.out.printf("%12s  >>  ", key);
+        System.out.printf("Total Countries = %d\n", allCountries.size());
+        System.out.printf("Total Features = %d\n", workingMap.size());
+
+        for (Map.Entry<String, LinkedHashSet<String>> entry : workingMap.entrySet()) {
+            String feature = entry.getKey();
+            LinkedHashSet<String> countries = entry.getValue();
+            if (countries != null) {
+                System.out.printf("%12s  >>  ", feature);
                 int i = 0;
-                ArrayList<String> list = new ArrayList<String>();
-                for (String CT : s) {
-                    list.add(CT);
-                }
-                Collections.sort(list);
-                for (String CT : list) {
+                ArrayList<String> sortedCountries = new ArrayList<>(countries);
+                Collections.sort(sortedCountries);
+                for (String country : sortedCountries) {
                     if (i % 7 == 0 && i != 0) {
                         System.out.printf("\n                  ");
                     }
-                    System.out.printf("%-15s  ", CT);
+                    System.out.printf("%-15s  ", country);
                     i++;
                 }
             }
-            System.out.printf("\n\n\n");
-
+            System.out.println("\n\n");
         }
     }
 }
