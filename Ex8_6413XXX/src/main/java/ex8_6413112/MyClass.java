@@ -1,6 +1,6 @@
-//6413xxx 
-//6413xxx 
-//update 02.29 27/03/23
+//6413112 
+//6413110
+//update 17.25 28/03/23
 
 package ex8_6413112;
 
@@ -12,12 +12,15 @@ class FlagFeatureMap {
     // Key = feature, Value = set of countries
     private TreeMap<String, LinkedHashSet<String>> workingMap; // String,Integer
     private LinkedHashSet<String> allCountries;
-    private ArrayList<String> A = new ArrayList<String>();
-    
+    private ArrayList<String> A;
+    private List<String> L;
+
     public FlagFeatureMap() // constructor
     {
         workingMap = new TreeMap<String, LinkedHashSet<String>>();
         allCountries = new LinkedHashSet<String>();
+        A = new ArrayList<String>();
+        L = new ArrayList<String>();
     }
 
     public void addCountry(String aCT) {
@@ -36,19 +39,35 @@ class FlagFeatureMap {
     }
 
     public void includeCountries(ArrayList<String> wantedFeatures) {
-        /*System.out.println("\n");
-        ArrayList<String> countryList = new ArrayList<>();
+        System.out.printf("\n");
+        ArrayList<String> countryList = new ArrayList<String>();
         if (wantedFeatures.isEmpty()) {
-            for (LinkedHashSet<String> featureCountries : workingMap.values()) {
-                if (featureCountries != null) {
-                    countryList.addAll(featureCountries);
+            System.out.printf("{}\n");
+            for (LinkedHashSet<String> s : workingMap.values()) {
+                if (s != null) {
+                    for (String country : s) {
+                        if (!countryList.contains(country)) {
+                            countryList.add(country);
+                        }
+                    }
                 }
             }
         } else {
             for (String feature : wantedFeatures) {
-                LinkedHashSet<String> featureCountries = workingMap.get(feature);
-                if (featureCountries != null) {
-                    countryList.addAll(featureCountries);
+                LinkedHashSet<String> s = workingMap.get(feature);
+                if (s != null) {
+                    System.out.printf("+%s  ", feature);
+                    ArrayList<String> tempCountryList = new ArrayList<String>();
+                    for (String country : s) {
+                        if (countryList.contains(country)) {
+                            tempCountryList.add(country);
+                        } else {
+                            countryList.add(country);
+                        }
+                    }
+                    if (!tempCountryList.isEmpty()) {
+                        countryList = tempCountryList;
+                    }
                 }
             }
         }
@@ -59,79 +78,17 @@ class FlagFeatureMap {
             }
             System.out.printf("%-15s  ", countryList.get(i));
         }
-        System.out.println();*/
         System.out.printf("\n");
-        ArrayList<String> T = new ArrayList<String>();
-        if (wantedFeatures.isEmpty()) {
-            System.out.printf("{}\n");
-            int i = 0;
-            for (String key : workingMap.keySet()) {
-                LinkedHashSet<String> s = workingMap.get(key);
-                if (s != null) {
-                    for (String CT : s) {
-                        if (!A.contains(CT)) {
-                            A.add(CT);
-                        }
-                    }
-                }
-            }
-            Collections.sort(A);
-            for (String CT : A) {
-                if (i % 7 == 0) {
-                    System.out.printf("\n                  ");
-                }
-                System.out.printf("%-15s  ", CT);
-                i++;
-            }
-            System.out.printf("\n");
-        } else {
-            int a = 0;
-            for (String key : wantedFeatures) {
-                T.clear();
-                if (workingMap.containsKey(key)) {
-                    System.out.printf("+%s  ", key);
-                    LinkedHashSet<String> s = workingMap.get(key);
-
-                    for (String CT : s) {
-                        if (a != 0) {
-                            for (String C : A) {
-                                if (C.equals(CT)) {
-                                    T.add(C);
-                                }
-                            }
-                        } else {
-                            A.add(CT);
-                        }
-                    }
-                    if (a == 0) {
-                        a = 1;
-                    } else {
-                        A = T;
-                    }
-                }
-            }
-            int i = 0;
-            Collections.sort(A);
-            for (String CT : A) {
-                if (i % 7 == 0) {
-                    System.out.printf("\n                  ");
-                }
-                System.out.printf("%-15s  ", CT);
-                i++;
-            }
-            System.out.printf("\n");
-        }
-
     }
 
-    public void excludeCountries(ArrayList<String> wantedFeatures,ArrayList<String> unwantedFeatures) {
+    public void excludeCountries(ArrayList<String> wantedFeatures, ArrayList<String> unwantedFeatures) {
         // Get set of countries using each unwanted feature as a key
         // Use set operations to exclude countries whose flags have unwanted features
         System.out.printf("\n");
         ArrayList<String> T = new ArrayList<String>();
         if (wantedFeatures == null) {
             System.out.printf("{}\n");
-            //showAll();
+            printData();
         } else {
             for (String key : wantedFeatures) {
                 T.clear();
@@ -140,7 +97,7 @@ class FlagFeatureMap {
                 }
             }
         }
-        System.out.printf("but  ");
+        System.out.printf("BUT  ");
         if (unwantedFeatures.isEmpty()) {
             System.out.printf("{}\n");
             int i = 0;
@@ -207,37 +164,33 @@ class FlagFeatureMap {
             System.out.println("\n\n");
         }
     }
+
     public void start() {
         printData();
-        boolean Continue = true;
-        while (Continue) {
-            Continue = false;
-            System.out.printf("======================================================================\n");
-            System.out.printf("Enter features with prefix + or - (wanted or unwanted), separated by comma =\n");
-            Scanner scan = new Scanner(System.in);
-            String in = scan.nextLine();
-            String[] buf = in.split(",");
-            ArrayList<String> want = new ArrayList<String>();
-            ArrayList<String> unwant = new ArrayList<String>();
-            for (int i = 0; i < buf.length; i++) {
-                if (buf[i].trim().charAt(0) == '+') {
-                    want.add(buf[i].trim().substring(1));
-                } else if (buf[i].trim().charAt(0) == '-') {
-                    unwant.add(buf[i].trim().substring(1));
-                }
+        ArrayList<String> want = new ArrayList<>();
+        ArrayList<String> unwant = new ArrayList<>();
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.println("===================================================================================");
+            System.out.println("Enter features with prefix + or - (wanted or unwanted), separated by comma =");
+            String[] buf = scan.nextLine().split(",");
+
+            for (String s : buf) {
+                ArrayList<String> list = s.trim().startsWith("+") ? want : unwant;
+                list.add(s.trim().substring(1));
             }
             includeCountries(want);
             excludeCountries(want, unwant);
             A.clear();
-            System.out.printf("\nEnter Y/y to continue = \n");
-            String check = scan.nextLine();
-            if(check.equals("Y")||check.equals("y"))
-                Continue = true;
+            System.out.println("\nEnter Y/y to continue = ");
+            if (!scan.nextLine().equalsIgnoreCase("Y")) {
+                break;
+            }
         }
     }
 }
 
-public class MyClass {
+public class exercise8_short {
     // Write a main class to do the following:
     // 2.1 Read data from flags.txt into workingMap and allCountries.
     public static void main(String[] args) {
@@ -272,8 +225,71 @@ public class MyClass {
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
-        //F.printData();
         F.start();
     }
-
 }
+/*
+    public void includeCountries(ArrayList<String> wantedFeatures) {
+        System.out.printf("\n");
+        ArrayList<String> T = new ArrayList<String>();
+        if (wantedFeatures.isEmpty()) {
+            System.out.printf("{}\n");
+            int i = 0;
+            for (String key : workingMap.keySet()) {
+                LinkedHashSet<String> s = workingMap.get(key);
+                if (s != null) {
+                    for (String CT : s) {
+                        if (!A.contains(CT)) {
+                            A.add(CT);
+                        }
+                    }
+                }
+            }
+            Collections.sort(A);
+            for (String CT : A) {
+                if (i % 7 == 0) {
+                    System.out.printf("\n                  ");
+                }
+                System.out.printf("%-15s  ", CT);
+                i++;
+            }
+            System.out.printf("\n");
+        } else {
+            int a = 0;
+            for (String key : wantedFeatures) {
+                T.clear();
+                if (workingMap.containsKey(key)) {
+                    System.out.printf("+%s  ", key);
+                    LinkedHashSet<String> s = workingMap.get(key);
+
+                    for (String CT : s) {
+                        if (a != 0) {
+                            for (String C : A) {
+                                if (C.equals(CT)) {
+                                    T.add(C);
+                                }
+                            }
+                        } else {
+                            A.add(CT);
+                        }
+                    }
+                    if (a == 0) {
+                        a = 1;
+                    } else {
+                        A = T;
+                    }
+                }
+            }
+            int i = 0;
+            Collections.sort(A);
+            for (String CT : A) {
+                if (i % 7 == 0) {
+                    System.out.printf("\n                  ");
+                }
+                System.out.printf("%-15s  ", CT);
+                i++;
+            }
+            System.out.printf("\n");
+        }
+    }
+*/
