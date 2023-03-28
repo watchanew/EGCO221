@@ -1,4 +1,4 @@
-/6413112 
+//6413112 
 //6413110
 //update 17.25 28/03/23
 
@@ -48,6 +48,7 @@ class FlagFeatureMap {
                     for (String country : s) {
                         if (!countryList.contains(country)) {
                             countryList.add(country);
+                            A.add(country); //add
                         }
                     }
                 }
@@ -61,8 +62,10 @@ class FlagFeatureMap {
                     for (String country : s) {
                         if (countryList.contains(country)) {
                             tempCountryList.add(country);
+                            //countryList.add(country); //add
                         } else {
                             countryList.add(country);
+                            A.add(country); //add
                         }
                     }
                     if (!tempCountryList.isEmpty()) {
@@ -228,67 +231,3 @@ public class exercise8_short {
         F.start();
     }
 }
-/*
-    public void includeCountries(ArrayList<String> wantedFeatures) {
-        System.out.printf("\n");
-        ArrayList<String> T = new ArrayList<String>();
-        if (wantedFeatures.isEmpty()) {
-            System.out.printf("{}\n");
-            int i = 0;
-            for (String key : workingMap.keySet()) {
-                LinkedHashSet<String> s = workingMap.get(key);
-                if (s != null) {
-                    for (String CT : s) {
-                        if (!A.contains(CT)) {
-                            A.add(CT);
-                        }
-                    }
-                }
-            }
-            Collections.sort(A);
-            for (String CT : A) {
-                if (i % 7 == 0) {
-                    System.out.printf("\n                  ");
-                }
-                System.out.printf("%-15s  ", CT);
-                i++;
-            }
-            System.out.printf("\n");
-        } else {
-            int a = 0;
-            for (String key : wantedFeatures) {
-                T.clear();
-                if (workingMap.containsKey(key)) {
-                    System.out.printf("+%s  ", key);
-                    LinkedHashSet<String> s = workingMap.get(key);
-                    for (String CT : s) {
-                        if (a != 0) {
-                            for (String C : A) {
-                                if (C.equals(CT)) {
-                                    T.add(C);
-                                }
-                            }
-                        } else {
-                            A.add(CT);
-                        }
-                    }
-                    if (a == 0) {
-                        a = 1;
-                    } else {
-                        A = T;
-                    }
-                }
-            }
-            int i = 0;
-            Collections.sort(A);
-            for (String CT : A) {
-                if (i % 7 == 0) {
-                    System.out.printf("\n                  ");
-                }
-                System.out.printf("%-15s  ", CT);
-                i++;
-            }
-            System.out.printf("\n");
-        }
-    }
-*/
